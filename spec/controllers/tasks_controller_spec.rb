@@ -12,14 +12,16 @@ describe TasksController, type: :controller do
   end
 
   it "includes completeness of a task" do
-    task
     get :show, params: {id: task.id}
-    parsed_json = JSON.parse(response.body)
-    expect(parsed_json['completed']).to eq false
+    json1 = JSON.parse(response.body)
+    expect(json1['completed']).to eq false
+  end
+  it "shows a change in completeness of a task" do
     task.complete
     task.save
-    get :index
-    expect(parsed_json['completed']).to eq true
+    get :show, params: {id: task.id}
+    json2 = JSON.parse(response.body)
+    expect(json2['completed']).to eq true
   end
 
 end
