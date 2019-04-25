@@ -45,10 +45,10 @@ describe Task, type: :model do
   
   describe "#completable?" do
     it "returns false if any prerequisites are incomplete" do
-      task2.uncomplete
-      task3.uncomplete
       task1.prerequisites << task2
       task1.prerequisites << task3
+      task2.update(completed: false)
+      task3.update(completed: false)
       expect(task1.completable?).to eq false 
     end
 
