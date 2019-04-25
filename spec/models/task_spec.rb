@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "has a name" do
+    expect(Task).to respond_to(:name)  
+  end
 end
