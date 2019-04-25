@@ -30,8 +30,8 @@ describe Task, type: :model do
     it "raises an error if a task is not completable" do
       task1.prerequisites << task2
       task1.prerequisites << task3
-      task2.update(completed: false)
-      task3.update(completed: false)
+      task2.uncomplete
+      task3.uncomplete
       expect(task1.completable?).to eq false 
       expect{task1.complete}.to raise_error StandardError
     end
@@ -57,16 +57,16 @@ describe Task, type: :model do
     it "returns false if any prerequisites are incomplete" do
       task1.prerequisites << task2
       task1.prerequisites << task3
-      task2.update(completed: false)
-      task3.update(completed: false)
+      task2.uncomplete
+      task3.uncomplete
       expect(task1.completable?).to eq false 
     end
 
     it "returns true if all prerequisites are complete" do
       task1.prerequisites << task2
       task1.prerequisites << task3
-      task2.update(completed: true)
-      task3.update(completed: true)
+      task2.complete
+      task3.complete
       expect(task1.completable?).to eq true
     end
 
@@ -74,7 +74,7 @@ describe Task, type: :model do
       task1.prerequisites << task2
       task2.prerequisites << task3
       expect(task1.completable?).to eq false 
-      task3.update(completed:true)
+      task3.complete
       expect(task1.completable?).to eq false 
     end
   end
