@@ -7,6 +7,7 @@ class Task < ApplicationRecord
   end
 
   def complete
+    raise StandardError, "This task is not completable" if !self.completable?
     self.completed = true
   end
 
@@ -23,7 +24,6 @@ class Task < ApplicationRecord
   end
 
   def completable?
-    # binding.pry
     self.prerequisites.all? { |t| t.complete? }
   end
 

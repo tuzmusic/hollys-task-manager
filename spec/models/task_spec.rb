@@ -26,7 +26,17 @@ describe Task, type: :model do
       task1.complete
       expect(task1.completed).to eq true
     end
+
+    it "raises an error if a task is not completable" do
+      task1.prerequisites << task2
+      task1.prerequisites << task3
+      task2.update(completed: false)
+      task3.update(completed: false)
+      expect(task1.completable?).to eq false 
+      expect{task1.complete}.to raise_error StandardError
+    end
   end
+
   describe "#uncomplete" do
     it "marks a completed task as not completed" do
       expect(task1.completed).to eq false
