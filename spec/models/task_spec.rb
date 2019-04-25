@@ -69,6 +69,21 @@ describe Task, type: :model do
       task3.update(completed: true)
       expect(task1.completable?).to eq true
     end
+
+    it "handles 'nested' incompleteness" do
+      task1.prerequisites << task2
+      task2.prerequisites << task3
+      expect(task1.completable?).to eq false 
+      task3.update(completed:true)
+      expect(task1.completable?).to eq false 
+    end
+  end
+
+  context "trying to add tasks as prerequisites to each other" do
+    it "raises an error" do
+      task1.prerequisites << task2
+      expect{task2.prerequisites << task1}.to raise_error StandardError
+    end
   end
   
 end
