@@ -6,6 +6,10 @@ class Task < ApplicationRecord
     self.completed = true
   end
 
+  def uncomplete
+    self.completed = false
+  end
+
   def complete?
     self.complete
   end
@@ -15,7 +19,7 @@ class Task < ApplicationRecord
   end
 
   def completable?
-    self.prerequisites.any? { |t| t.incomplete? }
+    self.prerequisites.all? { |t| t.complete? }
   end
 
 end

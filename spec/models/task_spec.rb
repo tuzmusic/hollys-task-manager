@@ -27,6 +27,15 @@ describe Task, type: :model do
       expect(task1.completed).to eq true
     end
   end
+  describe "#uncomplete" do
+    it "marks a completed task as not completed" do
+      expect(task1.completed).to eq false
+      task1.complete
+      expect(task1.completed).to eq true
+      task1.uncomplete
+      expect(task1.completed).to eq false
+    end
+  end
 
   describe "#complete?" do
     it "is an alternate getter for completeness" do
@@ -36,9 +45,19 @@ describe Task, type: :model do
   
   describe "#completable?" do
     it "returns false if any prerequisites are incomplete" do
+      task2.uncomplete
+      task3.uncomplete
       task1.prerequisites << task2
       task1.prerequisites << task3
       expect(task1.completable?).to eq false 
+    end
+
+    it "returns true if all prerequisites are complete" do
+      task1.prerequisites << task2
+      task1.prerequisites << task3
+      task2.update(completed: true)
+      task3.update(completed: true)
+      expect(task1.completable?).to eq true
     end
   end
   
