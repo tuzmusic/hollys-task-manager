@@ -16,12 +16,19 @@ describe TasksController, type: :controller do
     json1 = JSON.parse(response.body)
     expect(json1['completed']).to eq false
   end
+
   it "shows a change in completeness of a task" do
     task.complete
     task.save
     get :show, params: {id: task.id}
     json2 = JSON.parse(response.body)
     expect(json2['completed']).to eq true
+  end
+
+  it "shows whether a task is completable" do
+    get :show, params: {id: task.id}
+    json = JSON.parse(response.body)
+    expect(json['completable']).to eq true
   end
 
 end
