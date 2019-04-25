@@ -11,7 +11,6 @@ RSpec.describe Task, type: :model do
   it "has many prerequisites" do
     task = Task.create(name: "Do a thing")
     task2 = Task.create(name: "Do this first")
-    # binding.pry
     task.prerequisites << task2
     expect(task.prerequisites).to match [task2] 
   end
