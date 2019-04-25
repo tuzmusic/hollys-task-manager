@@ -10,4 +10,10 @@ class Task < ApplicationRecord
     self.complete
   end
 
+  def completable?
+    self.prerequisites.any? do |t|
+      !t.complete
+    end
+  end
+
 end
