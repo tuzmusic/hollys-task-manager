@@ -26,6 +26,12 @@ describe Task, type: :model do
       expect(task.completed).to eq true
     end
   end
+
+  describe "#complete?" do
+    it "is an alternate getter for completeness" do
+      expect(task.complete?).to eq task.completed
+    end
+  end
   
 end
 

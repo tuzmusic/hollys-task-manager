@@ -5,4 +5,9 @@ class Task < ApplicationRecord
   def complete
     self.completed = true
   end
+
+  def complete?
+    self.complete
+  end
+
 end
