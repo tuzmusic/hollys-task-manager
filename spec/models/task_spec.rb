@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-
-RSpec.describe Task, type: :model do
+describe Task, type: :model do
   let(:task) { Task.create(name: "Do a thing") }
 
   it "has a name" do
@@ -24,7 +23,6 @@ RSpec.describe Task, type: :model do
     it "marks a task as completed" do
       expect(task.completed).to eq false
       task.complete
-      # hi there
       expect(task.completed).to eq true
     end
   end
