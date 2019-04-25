@@ -22,6 +22,7 @@ RSpec.describe Task, type: :model do
 
   describe "#complete" do
     it "marks a task as completed" do
+      expect(task.completed).to eq false
       task.complete
       # hi there
       expect(task.completed).to eq true
