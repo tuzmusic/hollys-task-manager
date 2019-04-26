@@ -63,6 +63,16 @@ describe TasksController, type: :controller do
       expect(task.completed).to eq task1.completed
       expect(task.prerequisite_ids).to eq task1.prerequisite_ids
     end
+
+    it "returns the correct json for the new task" do
+      post :create, params: {task: @task_attr}
+      json = JSON.parse(response.body)
+      # binding.pry
+      expect(json['name']).to eq task1.name
+      expect(json['description']).to eq task1.description
+      expect(json['completed']).to eq task1.completed
+      expect(json['prerequisite_ids']).to eq task1.prerequisite_ids
+    end
   end
 
   describe "PUT /tasks" do
@@ -74,17 +84,17 @@ describe TasksController, type: :controller do
         name: "Edited name",
         description: "Edited description", 
         prerequisite_ids: [task2.id], 
-        completed: false, 
+        completed: true, 
       }
     end
     
     it "edits a task" do
       put :update, params: {id: task1.id, task: @new_task_attr}
       task = Task.find(task1.id)
-      expect(task['name']).to eq @new_task_attr[:name]
-      expect(task['description']).to eq @new_task_attr[:description]
-      expect(task['prerequisite_ids']).to eq @new_task_attr[:prerequisite_ids]
-      expect(task['completed']).to eq @new_task_attr[:completed]
+      expect(task.name).to eq @new_task_attr[:name]
+      expect(task.description).to eq @new_task_attr[:description]
+      expect(task.prerequisite_ids).to eq @new_task_attr[:prerequisite_ids]
+      expect(task.completed).to eq @new_task_attr[:completed]
     end
   end
 
