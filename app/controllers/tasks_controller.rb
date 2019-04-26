@@ -20,6 +20,10 @@ class TasksController < ApplicationController
     task.update prerequisite_ids: task_params[:prerequisite_ids]
     render json: task, status: 201
   end
+
+  def destroy
+    Task.find(params[:id]).delete
+  end
   
 end
 

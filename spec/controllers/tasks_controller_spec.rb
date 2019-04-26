@@ -106,4 +106,10 @@ describe TasksController, type: :controller do
 
   end
 
+  describe "DELETE task/:id" do
+    it "deletes the task" do
+      expect{delete :destroy, params: {id: task1.id}}.to change{Task.count}.by -1
+    end
+  end
+
 end
