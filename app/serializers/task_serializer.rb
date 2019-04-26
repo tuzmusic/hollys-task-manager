@@ -1,5 +1,5 @@
 class TaskSerializer < ActiveModel::Serializer
-  attributes  :id, :name, :description, :completed, :completable, :prerequisite_ids
+  attributes  :id, :name, :description, :completed, :prerequisite_ids
 
   def completable
     object.completable?
