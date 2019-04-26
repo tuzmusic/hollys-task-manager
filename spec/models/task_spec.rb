@@ -81,6 +81,19 @@ describe Task, type: :model do
     end
   end
 
+  describe "#toggle!" do
+    it "marks an incomplete task as complete" do
+      task1.toggle!
+      expect(task1.complete?).to eq true 
+    end
+
+    it "marks a complete task as incomplete" do
+      task1.complete!
+      task1.toggle!
+      expect(task1.complete?).to eq false
+    end
+  end
+
   context "trying to add tasks as prerequisites to each other" do
     it "raises an error" do
       task1.prerequisites << task2

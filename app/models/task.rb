@@ -27,4 +27,8 @@ class Task < ApplicationRecord
     self.prerequisites.all? { |t| t.complete? }
   end
 
+  def toggle! 
+    self.completed = !self.completed
+  end
+
 end
