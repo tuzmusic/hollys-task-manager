@@ -67,7 +67,6 @@ describe TasksController, type: :controller do
     it "returns the correct json for the new task" do
       post :create, params: {task: @task_attr}
       json = JSON.parse(response.body)
-      # binding.pry
       expect(json['name']).to eq task1.name
       expect(json['description']).to eq task1.description
       expect(json['completed']).to eq task1.completed
@@ -86,16 +85,25 @@ describe TasksController, type: :controller do
         prerequisite_ids: [task2.id], 
         completed: true, 
       }
+      put :update, params: {id: task1.id, task: @new_task_attr}
     end
     
     it "edits a task" do
-      put :update, params: {id: task1.id, task: @new_task_attr}
       task = Task.find(task1.id)
       expect(task.name).to eq @new_task_attr[:name]
       expect(task.description).to eq @new_task_attr[:description]
       expect(task.prerequisite_ids).to eq @new_task_attr[:prerequisite_ids]
       expect(task.completed).to eq @new_task_attr[:completed]
     end
+
+    it "returns the correct json for the updated task" do
+      json = JSON.parse(response.body)
+      expect(json['name']).to eq @new_task_attr[:name]
+      expect(json['description']).to eq @new_task_attr[:description]
+      expect(json['completed']).to eq @new_task_attr[:completed]
+      expect(json['prerequisite_ids']).to eq @new_task_attr[:prerequisite_ids]
+    end
+
   end
 
 end
