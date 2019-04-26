@@ -42,8 +42,8 @@ describe TasksController, type: :controller do
       expect(json['prerequisite_ids']).to match ids
     end
   end
-  
-  describe "POST /tasks" do
+
+  describe "POST /tasks/:id" do
     before :each do
       task1.prerequisites << task2
       task1.prerequisites << task3
@@ -67,4 +67,28 @@ describe TasksController, type: :controller do
       expect(json['prerequisite_ids']).to eq task1.prerequisite_ids.map {|p| p.to_s}
     end
   end
+
+  describe "PUT /tasks" do
+    before :each do
+      task1.prerequisites << task2
+      task1.prerequisites << task3
+
+      @new_task_attr = { 
+        name: "Edited name",
+        description: "Edited description", 
+        prerequisite_ids: [task2.id], 
+        completed: false, 
+      }
+    end
+    
+    it "edits a task" do
+      put :update, params: {id: task1.id, task: @task_attr}
+      task = Task.find(task1.id)
+      expect(task['name']).to eq @new_task_attr['name']
+      expect(task['description']).to eq @new_task_attr['description']
+      expect(task['prerequisite_ids']).to eq @new_task_attr['prerequisite_ids']
+      expect(task['completed']).to eq @new_task_attr['completed']
+    end
+  end
+
 end
