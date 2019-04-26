@@ -6,6 +6,8 @@ class TaskSerializer < ActiveModel::Serializer
   end
 
   def prereq_ids
-    object.prerequisites.map {|t| t.id}
+    object.prereq_ids
   end
+
+
 end

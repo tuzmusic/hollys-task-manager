@@ -31,4 +31,8 @@ class Task < ApplicationRecord
     self.completed = !self.completed
   end
 
+  def prereq_ids
+    self.prerequisites.map {|t| t.id}
+  end
+
 end
