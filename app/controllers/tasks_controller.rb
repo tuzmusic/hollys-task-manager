@@ -7,4 +7,9 @@ class TasksController < ApplicationController
     task = Task.find(params[:id])
     render json: task
   end
+
+  def create
+    task = params[:task]
+    render json: task, status: 201
+  end
 end

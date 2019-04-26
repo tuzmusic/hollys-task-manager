@@ -100,6 +100,6 @@ describe Task, type: :model do
   #     expect{task2.prerequisites << task1}.to raise_error StandardError
   #   end
   # end
-  
+
 end
 

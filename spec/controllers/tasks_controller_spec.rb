@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe TasksController, type: :controller do
-  let(:task1) { Task.create(name: "Do a thing") }
-  let(:task2) { Task.create(name: "Do this first") }
-  let(:task3) { Task.create(name: "Do this second") }
+  let(:task1) { Task.create(name: "Do a thing", description:"Or don't, I don't care.") }
+  let(:task2) { Task.create(name: "Do this first", description:"Or don't, I don't care.") }
+  let(:task3) { Task.create(name: "Do this second", description:"Or don't, I don't care.") }
 
   before :each do
     get :show, params: {id: task1.id}
@@ -37,23 +37,34 @@ describe TasksController, type: :controller do
       ids = [task2.id, task3.id]
       get :show, params: {id: task1.id}
       json = JSON.parse(response.body)
-      expect(json['prereq_ids']).to match ids
+      # binding.pry
+      # expect(json['prereq_ids']).to match ids
+      expect(json['prerequisite_ids']).to match ids
     end
   end
   
   describe "POST /tasks" do
     before :each do
-      task_attr = { name: task1.name, description: task1.description, prereq_ids: task1.prereq_ids, completed: task1.completed, completable: task1.completable? }
-      post :create, task: task_attr
-    end
+      task1.prerequisites << task2
+      task1.prerequisites << task3
 
+      @task_attr = { 
+        name: task1.name, 
+        description: task1.description, 
+        prerequisite_ids: task1.prereq_ids, 
+        completed: task1.completed, 
+        completable: task1.completable? 
+      }
+    end
+    
     it "creates a tasks with given params" do
-      @json = JSON.parse(response.body)
-      expect(body['name']).to eq task1.name
-      expect(body['description']).to eq task1.description
-      expect(body['prereq_ids']).to eq task1.prereq_ids
-      expect(body['completed']).to eq task1.completed
-      expect(body['completable']).to eq task1.completable?
+      post :create, params: {task: @task_attr}
+      json = JSON.parse(response.body)
+      expect(json['name']).to eq task1.name.to_s
+      expect(json['description']).to eq task1.description.to_s
+      expect(json['completed']).to eq task1.completed.to_s
+      expect(json['completable']).to eq task1.completable?.to_s
+      expect(json['prerequisite_ids']).to eq task1.prerequisite_ids.map {|p| p.to_s}
     end
   end
 end
