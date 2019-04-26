@@ -6,12 +6,12 @@ class Task < ApplicationRecord
     self.prerequisites
   end
 
-  def complete
+  def complete!
     raise StandardError, "This task is not completable" if !self.completable?
     self.completed = true
   end
 
-  def uncomplete
+  def uncomplete!
     self.completed = false
   end
 
