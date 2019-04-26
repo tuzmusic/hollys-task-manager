@@ -2,10 +2,6 @@ class Task < ApplicationRecord
   has_many :prerequisite_tasks, foreign_key: :do_second_id  
   has_many :prerequisites, through: :prerequisite_tasks, source: :do_first
 
-  def prereqs
-    self.prerequisites
-  end
-
   def complete!
     raise StandardError, "This task is not completable" if !self.completable?
     self.completed = true
@@ -30,9 +26,4 @@ class Task < ApplicationRecord
   def toggle! 
     self.completed = !self.completed
   end
-
-  def prereq_ids
-    self.prerequisites.map {|t| t.id}
-  end
-  
 end

@@ -9,7 +9,20 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = params[:task]
+    task = Task.create name: task_params[:name], description: task_params[:description], completed: task_params[:completed]
+    task.update prerequisite_ids: task_params[:prerequisite_ids]
+    # binding.pry
     render json: task, status: 201
   end
+  
+  def update
+    task = Task.find params[:id]
+    task.update task_params
+    render json: task, status: 201
+  end
+  
+end
+
+def task_params
+  params.require(:task).permit :name, :description, :completed, prerequisite_ids: []
 end

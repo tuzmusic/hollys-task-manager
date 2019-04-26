@@ -27,18 +27,16 @@ describe TasksController, type: :controller do
       expect(json['completed']).to eq true
     end
   
-    it "shows whether a task is completable" do
-      expect(@json['completable']).to eq true
-    end  
+    # it "shows whether a task is completable" do
+    #   expect(@json['completable']).to eq true
+    # end  
   
-    it "includes the prereq_ids" do
+    it "includes the prerequisite_ids" do
       task1.prerequisites << task2
       task1.prerequisites << task3
       ids = [task2.id, task3.id]
       get :show, params: {id: task1.id}
       json = JSON.parse(response.body)
-      # binding.pry
-      # expect(json['prereq_ids']).to match ids
       expect(json['prerequisite_ids']).to match ids
     end
   end
@@ -51,20 +49,19 @@ describe TasksController, type: :controller do
       @task_attr = { 
         name: task1.name, 
         description: task1.description, 
-        prerequisite_ids: task1.prereq_ids, 
+        prerequisite_ids: task1.prerequisite_ids, 
         completed: task1.completed, 
-        completable: task1.completable? 
       }
     end
     
     it "creates a tasks with given params" do
-      post :create, params: {task: @task_attr}
-      json = JSON.parse(response.body)
-      expect(json['name']).to eq task1.name.to_s
-      expect(json['description']).to eq task1.description.to_s
-      expect(json['completed']).to eq task1.completed.to_s
-      expect(json['completable']).to eq task1.completable?.to_s
-      expect(json['prerequisite_ids']).to eq task1.prerequisite_ids.map {|p| p.to_s}
+      expect{post :create, params: {task: @task_attr}}.to change{Task.count}.by 1
+      task = Task.last
+      # binding.pry
+      expect(task.name).to eq task1.name
+      expect(task.description).to eq task1.description
+      expect(task.completed).to eq task1.completed
+      expect(task.prerequisite_ids).to eq task1.prerequisite_ids
     end
   end
 
@@ -82,12 +79,12 @@ describe TasksController, type: :controller do
     end
     
     it "edits a task" do
-      put :update, params: {id: task1.id, task: @task_attr}
+      put :update, params: {id: task1.id, task: @new_task_attr}
       task = Task.find(task1.id)
-      expect(task['name']).to eq @new_task_attr['name']
-      expect(task['description']).to eq @new_task_attr['description']
-      expect(task['prerequisite_ids']).to eq @new_task_attr['prerequisite_ids']
-      expect(task['completed']).to eq @new_task_attr['completed']
+      expect(task['name']).to eq @new_task_attr[:name]
+      expect(task['description']).to eq @new_task_attr[:description]
+      expect(task['prerequisite_ids']).to eq @new_task_attr[:prerequisite_ids]
+      expect(task['completed']).to eq @new_task_attr[:completed]
     end
   end
 
