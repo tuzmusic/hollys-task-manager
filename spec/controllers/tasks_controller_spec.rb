@@ -107,9 +107,7 @@ describe TasksController, type: :controller do
 
     it "can just mark a task as complete" do
       expect(Task.find(task1.id).completed).to eq false
-      # binding.pry
       put :update, params: {id: task1.id, task: {completed: true}}
-      # binding.pry
       expect(Task.find(task1.id).completed).to eq true
     end
 
