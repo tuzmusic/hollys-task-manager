@@ -85,10 +85,10 @@ describe TasksController, type: :controller do
         prerequisite_ids: [task2.id], 
         completed: true, 
       }
-      put :update, params: {id: task1.id, task: @new_task_attr}
     end
     
     it "edits a task" do
+      put :update, params: {id: task1.id, task: @new_task_attr}
       task = Task.find(task1.id)
       expect(task.name).to eq @new_task_attr[:name]
       expect(task.description).to eq @new_task_attr[:description]
@@ -97,6 +97,7 @@ describe TasksController, type: :controller do
     end
 
     it "returns the correct json for the updated task" do
+      put :update, params: {id: task1.id, task: @new_task_attr}
       json = JSON.parse(response.body)
       expect(json['name']).to eq @new_task_attr[:name]
       expect(json['description']).to eq @new_task_attr[:description]
@@ -104,6 +105,21 @@ describe TasksController, type: :controller do
       expect(json['prerequisite_ids']).to eq @new_task_attr[:prerequisite_ids]
     end
 
+    it "can just mark a task as complete" do
+      expect(Task.find(task1.id).completed).to eq false
+      # binding.pry
+      put :update, params: {id: task1.id, task: {completed: true}}
+      # binding.pry
+      expect(Task.find(task1.id).completed).to eq true
+    end
+
+    it "can just add a prerequisite to a task" do
+      put :update, params: {id: task1.id, task: @new_task_attr}
+      expect(Task.find(task1.id).prerequisites.count).to eq 1
+      put :update, params: {id: task1.id, task: {prerequisite_ids: [task2.id, task3.id]}}
+      expect(Task.find(task1.id).prerequisites.count).to eq 2
+    end
+    
   end
 
   describe "DELETE task/:id" do

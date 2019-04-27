@@ -17,6 +17,7 @@ class TasksController < ApplicationController
   def update
     task = Task.find params[:id]
     task.update task_params
+    # binding.pry
     task.update prerequisite_ids: task_params[:prerequisite_ids]
     render json: task, status: 201
   end
