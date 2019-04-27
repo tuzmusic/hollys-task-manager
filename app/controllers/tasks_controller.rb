@@ -9,8 +9,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.create task_params.except(:prerequisite_ids)
-    task.update prerequisite_ids: task_params[:prerequisite_ids]
+    task = Task.make task_params
     render json: task, status: 201
   end
   

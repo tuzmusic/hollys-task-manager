@@ -94,12 +94,13 @@ describe Task, type: :model do
     end
   end
 
-  # context "trying to add tasks as prerequisites to each other" do
-  #   it "raises an error" do
-  #     task1.prerequisites << task2
-  #     expect{task2.prerequisites << task1}.to raise_error StandardError
-  #   end
-  # end
+  describe "Task.make" do
+    it "creates a task, and can take an array of prerequisite_ids" do
+      task = Task.make(name:"Do this last!", prerequisite_ids:[task2.id, task3.id])
+      expect(task.prerequisites).to include task2
+      expect(task.prerequisites).to include task3
+    end
+  end
 
 end
 
