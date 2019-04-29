@@ -1,6 +1,5 @@
 {
   "presets": [
-    "@babel/env"
+    "@babel/env", "@babel/react"
   ]
 }
-// {"presets": ["es2015"]}
