@@ -19,9 +19,11 @@ export default function taskReducer(state = initialState, action) {
       const newTask = createTask(state, action.task);
       return { ...state, ...newTask };
     case "DELETE_TASK":
-      const clone = { ...state };
-      delete clone[action.id];
-      return clone;
+      const clonedState = { ...state };
+      delete clonedState[action.id];
+      return clonedState;
+    case "EDIT_TASK":
+      return {...state, [action.id]: {...state[action.id], ...action.changes}}
     default:
       return state;
   }

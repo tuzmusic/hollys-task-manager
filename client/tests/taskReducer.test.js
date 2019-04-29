@@ -31,4 +31,10 @@ describe("tasks reducer", () => {
 
     expect(reducer(newState, action)).toEqual(initialState);
   });
+
+  it("can edit a task's name", () => {
+    const action = {type:"EDIT_TASK", id: 1, changes: {name: "new name"}}
+    const newState = reducer(initialState, action)
+    expect(newState[1].name).toEqual("new name")
+  });
 });
