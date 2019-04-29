@@ -1,5 +1,7 @@
 import React from "react";
 
-export default (Task = props => {
-  return <li className="task">{props.children}</li>;
-});
+const Task = props => {
+  return <li className="task">{props.task.name}</li>;
+}
+
+export default Task

@@ -17,23 +17,11 @@ function setup() {
 
 describe("components", () => {
   describe("Task", () => {
-    it("should render self and subcomponents", () => {
-      const { rendered } = setup();
-
+    it("should render an li with the task name", () => {
+      const task = { name: "sample task name" };
+      const rendered = shallow(<Task task={task} />);
       expect(rendered.find("li").hasClass("task")).toBe(true);
-
-      // const todoInputProps = rendered.find("TodoTextInput").props();
-      // expect(todoInputProps.newTodo).toBe(true);
-      // expect(todoInputProps.placeholder).toEqual("What needs to be done?");
+      expect(rendered.find("li").text()).toBe(task.name);
     });
-
-    // it("should call addTodo if length of text is greater than 0", () => {
-    //   const { rendered, props } = setup();
-    //   const input = rendered.find("TodoTextInput");
-    //   input.props().onSave("");
-    //   expect(props.addTodo.mock.calls.length).toBe(0);
-    //   input.props().onSave("Use Redux");
-    //   expect(props.addTodo.mock.calls.length).toBe(1);
-    // });
   });
 });
