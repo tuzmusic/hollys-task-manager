@@ -14,52 +14,47 @@ describe("toggleTask", () => {
     const expectedAction = {
       type: "EDIT_TASK",
       id: 1,
-      key: "completed",
-      value: true
+      changes: { completed: true }
     };
     expect(actions.toggleTask(task)).toEqual(expectedAction);
   });
 });
 
-describe('editTaskName', () => {
+describe("editTaskName", () => {
   it("should return a task id and new name for the task", () => {
     const task = { id: 1, name: "Finish docs" };
-    const newName = "Do this instead"
+    const newName = "Do this instead";
     const expectedAction = {
       type: "EDIT_TASK",
       id: 1,
-      key: "name",
-      value: newName
+      changes: { name: newName }
     };
     expect(actions.editTaskName(task, newName)).toEqual(expectedAction);
   });
-})
+});
 
-describe('editTaskDescription', () => {
+describe("editTaskDescription", () => {
   it("should return a task id and new name for the task", () => {
     const task = { id: 1, name: "Finish docs" };
-    const newDescription = "Do this instead"
+    const newDescription = "Do this instead";
     const expectedAction = {
       type: "EDIT_TASK",
       id: 1,
-      key: "description",
-      value: newDescription
+      changes: { description: newDescription }
     };
     expect(actions.editTaskDescription(task, newDescription)).toEqual(
       expectedAction
     );
   });
-})
+});
 
-describe('deleteTask', () => {
+describe("deleteTask", () => {
   it("should return delete action a task id", () => {
     const task = { id: 1, name: "Finish docs" };
     const expectedAction = {
       type: "DELETE_TASK",
-      id: 1,
+      id: 1
     };
-    expect(actions.deleteTask(task)).toEqual(
-      expectedAction
-    );
+    expect(actions.deleteTask(task)).toEqual(expectedAction);
   });
-})
+});
