@@ -37,4 +37,10 @@ describe("tasks reducer", () => {
     const newState = reducer(initialState, action)
     expect(newState[1].name).toEqual("new name")
   });
+
+  it("can mark a task complete", () => {
+    const action = {type:"EDIT_TASK", id: 1, changes: {completed: true}}
+    const newState = reducer(initialState, action)
+    expect(newState[1].completed).toEqual(true)
+  });
 });
