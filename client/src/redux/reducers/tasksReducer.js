@@ -1,3 +1,5 @@
+import Task from '../../models/Task'
+
 export const initialState = {
   1: {
     id: 1,
@@ -7,17 +9,17 @@ export const initialState = {
   }
 };
 
-function createTask(state, { name, description }) {
-  const id =
+function createTask(state, taskInfo) {
+  const id = taskInfo.id || 
     Object.keys(state).reduce((maxId, id) => Math.max(id, maxId), -1) + 1;
-  return { [id]: { id, name, description, completed: false } };
+  return new Task({ ...taskInfo, id: id});
 }
 
 export default function taskReducer(state = initialState, action) {
   switch (action.type) {
     case "ADD_TASK":
       const newTask = createTask(state, action.task);
-      return { ...state, ...newTask };
+      return { ...state, [newTask.id]: newTask };
     case "DELETE_TASK":
       const clonedState = { ...state };
       delete clonedState[action.id];

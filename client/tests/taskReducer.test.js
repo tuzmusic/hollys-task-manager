@@ -4,10 +4,10 @@ import Task from '../src/models/Task'
 describe("tasks reducer", () => {
   it("can add a task", () => {
     const newTask = new Task({
+      id: 2,
       name: "new task name",
-      description: "new task description"
+      description: "new task description",
     });
-    console.log(newTask);
     
     const action = { type: "ADD_TASK", task: newTask };
 
