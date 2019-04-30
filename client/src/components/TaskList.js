@@ -1,19 +1,18 @@
 import React from "react";
 import Task from "./TaskComponent";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
+import { toggleTask } from "../redux/actions/tasksActions";
 // import '../stylesheets/tasks.css' // comment this for tests
 
 class TaskList extends React.Component {
-
   onTaskCheck(id) {
-    const task = this.state.tasks[id];
-    this.setState({
-      tasks: { ...this.state.tasks, [id]: {...task, completed: !task.completed } }
-    });
+    const task = this.props.tasks[id];
+    this.props.toggleTask(task);
   }
 
   render() {
     const { tasks } = this.props;
+    console.log("render TaskList");
 
     return (
       <div className="tasks">
@@ -32,7 +31,9 @@ class TaskList extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return ({tasks: state.tasks})
-}
+  return { tasks: state.tasks };
+};
 
-export default connect(mapStateToProps)(TaskList)
+export default connect(
+  mapStateToProps,{toggleTask}
+)(TaskList);
