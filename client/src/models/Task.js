@@ -1,8 +1,8 @@
 export default class Task {
-  constructor ({name = '', description = '', prerequisite_ids =[] }) {
-    this.name = name
-    this.description = description
-    this.prerequisite_ids = prerequisite_ids
+  constructor (task) {
+    this.name = (task && task.name) || ""
+    this.description = (task && task.description) || ""
+    this.prerequisite_ids = (task && task.prerequisite_ids) || []
     this.completed = false
   }
 }
