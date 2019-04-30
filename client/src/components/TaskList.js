@@ -2,7 +2,7 @@ import React from "react";
 import Task from "./TaskComponent";
 // import '../stylesheets/tasks.css' // comment this for tests
 
-export default class TaskList extends React.Component {
+class TaskList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { tasks: this.props.tasks };
@@ -10,8 +10,6 @@ export default class TaskList extends React.Component {
   
 
   onTaskCheck(id) {
-    console.log("checked");
-    
     const task = this.state.tasks[id];
     this.setState({
       tasks: { ...this.state.tasks, [id]: {...task, completed: !task.completed } }
@@ -36,3 +34,5 @@ export default class TaskList extends React.Component {
     );
   }
 }
+
+export default TaskList

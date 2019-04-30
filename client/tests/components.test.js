@@ -36,12 +36,12 @@ describe("components", () => {
     });
 
     it("should change the task's completed state when checked", () => {
-      const firstKey = Object.keys(List.props().tasks)[0]
-      const firstTask = List.props().tasks[firstKey];
+      const firstKey = Object.keys(List.state().tasks)[0]
+      function firstTask() { return List.state().tasks[firstKey] };
       const taskComponent = List.find("Task").first()
-      const checkbox = taskComponent.find({ type: "checkbox" });
-      checkbox.simulate("click")
-      expect(firstTask.completed).toEqual(true);
+      const checkbox = taskComponent.find("input");
+      checkbox.simulate("change")
+      expect(firstTask().completed).toEqual(true);
     });
   });
 });
