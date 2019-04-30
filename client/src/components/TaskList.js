@@ -1,13 +1,9 @@
 import React from "react";
 import Task from "./TaskComponent";
+import {connect} from 'react-redux'
 // import '../stylesheets/tasks.css' // comment this for tests
 
 class TaskList extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { tasks: this.props.tasks };
-  }
-  
 
   onTaskCheck(id) {
     const task = this.state.tasks[id];
@@ -17,7 +13,7 @@ class TaskList extends React.Component {
   }
 
   render() {
-    const { tasks } = this.state;
+    const { tasks } = this.props;
 
     return (
       <div className="tasks">
@@ -35,4 +31,8 @@ class TaskList extends React.Component {
   }
 }
 
-export default TaskList
+const mapStateToProps = state => {
+  return ({tasks: state.tasks})
+}
+
+export default connect(mapStateToProps)(TaskList)

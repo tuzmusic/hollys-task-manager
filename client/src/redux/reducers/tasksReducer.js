@@ -1,6 +1,6 @@
 import Task from '../../models/Task'
 
-export const initialState = {
+export const initialState = { // using "defaultState" here breaks test. FIXME.
   1: {
     id: 1,
     name: "Sample task",
@@ -9,13 +9,20 @@ export const initialState = {
   }
 };
 
+const defaultState = {
+  1: new Task({ id: 1, name: "first task" }),
+  2: new Task({ id: 2, name: "second task, completed", completed: true }),
+  3: new Task({ id: 3, name: "third task" }),
+  4: new Task({ id: 4, name: "fourth task" })
+};
+
 function createTask(state, taskInfo) {
   const id = taskInfo.id || 
     Object.keys(state).reduce((maxId, id) => Math.max(id, maxId), -1) + 1;
   return new Task({ ...taskInfo, id: id});
 }
 
-export default function taskReducer(state = initialState, action) {
+export default function taskReducer(state = defaultState, action) {
   switch (action.type) {
     case "ADD_TASK":
       const newTask = createTask(state, action.task);
