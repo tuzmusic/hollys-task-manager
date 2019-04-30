@@ -25,13 +25,14 @@ describe("components", () => {
   });
 
   describe("TaskList", () => {
-    const tasks = {
-      1: { id: 1, name: "first task" },
-      2: { id: 2, name: "second task" }
-    };
+    it("should render a Task for each task in props.tasks", () => {
+      const tasks = {
+        1: { id: 1, name: "first task" },
+        2: { id: 2, name: "second task" }
+      };
 
-    const List = shallow(<TaskList tasks={tasks} />);
-    
-    // expect(List.find({ type: "li" })).toHaveLength(2);
+      const List = mount(<TaskList tasks={tasks} />);
+      expect(List.find("Task")).toHaveLength(2);
+    });
   });
 });
