@@ -1,16 +1,19 @@
 import reducer, { initialState } from "../src/redux/reducers/tasksReducer";
+import Task from '../src/models/Task'
 
 describe("tasks reducer", () => {
   it("can add a task", () => {
-    const newTask = {
+    const newTask = new Task({
       name: "new task name",
       description: "new task description"
-    };
+    });
+    console.log(newTask);
+    
     const action = { type: "ADD_TASK", task: newTask };
 
     const expectedState = {
       ...initialState,
-      2: { ...newTask, id: 2, completed: false }
+      2: newTask 
     };
 
     expect(reducer(initialState, action)).toEqual(expectedState);
@@ -33,14 +36,14 @@ describe("tasks reducer", () => {
   });
 
   it("can edit a task's name", () => {
-    const action = {type:"EDIT_TASK", id: 1, changes: {name: "new name"}}
-    const newState = reducer(initialState, action)
-    expect(newState[1].name).toEqual("new name")
+    const action = { type: "EDIT_TASK", id: 1, changes: { name: "new name" } };
+    const newState = reducer(initialState, action);
+    expect(newState[1].name).toEqual("new name");
   });
 
   it("can mark a task complete", () => {
-    const action = {type:"EDIT_TASK", id: 1, changes: {completed: true}}
-    const newState = reducer(initialState, action)
-    expect(newState[1].completed).toEqual(true)
+    const action = { type: "EDIT_TASK", id: 1, changes: { completed: true } };
+    const newState = reducer(initialState, action);
+    expect(newState[1].completed).toEqual(true);
   });
 });

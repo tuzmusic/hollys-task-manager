@@ -27,6 +27,11 @@ describe('models', () => {
       const newTask = new Task({name:"sample name", prerequisite_ids:[1,2]})
       expect(newTask.prerequisite_ids).toEqual([1,2]);
     });
+
+    it('can be initialized with a passed id', () => {
+      const newTask = new Task({name: "sample name", id: 5})
+      expect(newTask.id).toEqual(5)
+    });
   })
   
 })
