@@ -26,6 +26,13 @@
         "${workspaceFolder}/tests"
       ],
       "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "type": "chrome",
+      "request": "attach",
+      "name": "Attach to Chrome",
+      "port": 3000,
+      "webRoot": "${workspaceFolder}/index.html"
     }
   ]
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Task from "../src/components/TaskComponent";
-
+import TaskList from "../src/components/TaskList";
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("components", () => {
@@ -22,5 +22,16 @@ describe("components", () => {
       let checkbox = TaskComponent.find({ type: "checkbox" });
       expect(checkbox.props().checked).toEqual(false);
     });
+  });
+
+  describe("TaskList", () => {
+    const tasks = {
+      1: { id: 1, name: "first task" },
+      2: { id: 2, name: "second task" }
+    };
+
+    const List = shallow(<TaskList tasks={tasks} />);
+    
+    // expect(List.find({ type: "li" })).toHaveLength(2);
   });
 });

@@ -3,20 +3,26 @@ import "./App.css";
 import { combineReducers, createStore } from "redux";
 import { Provider } from "react-redux";
 
-import TaskComponent from "./components/TaskComponent";
+import TaskList from "./components/TaskList";
 import Task from "./models/Task";
 import taskReducer from "./redux/reducers/tasksReducer";
 
 const reducer = combineReducers({ tasks: taskReducer });
 const store = createStore(reducer, {});
 
+const mockTasks = {
+  1: new Task({ id: 1, name: "first task" }),
+  2: new Task({ id: 2, name: "second task" }),
+  3: new Task({ id: 3, name: "third task" }),
+  4: new Task({ id: 4, name: "fourth task" })
+};
+
 function App() {
-  const someTask = new Task({ name: "Sample task!" });
 
   return (
     <Provider store={store}>
       <div className="App">
-        <TaskComponent task={someTask} />
+        <TaskList tasks={mockTasks} />
       </div>
     </Provider>
   );
