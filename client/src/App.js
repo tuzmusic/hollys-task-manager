@@ -12,7 +12,7 @@ const store = createStore(reducer, {});
 
 const mockTasks = {
   1: new Task({ id: 1, name: "first task" }),
-  2: new Task({ id: 2, name: "second task" }),
+  2: new Task({ id: 2, name: "second task, completed", completed: true }),
   3: new Task({ id: 3, name: "third task" }),
   4: new Task({ id: 4, name: "fourth task" })
 };

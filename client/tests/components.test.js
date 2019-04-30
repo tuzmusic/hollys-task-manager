@@ -3,11 +3,12 @@ import Enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Task from "../src/components/TaskComponent";
 import TaskList from "../src/components/TaskList";
+import TaskObject from "../src/models/Task";
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("components", () => {
   describe("Task", () => {
-    const task = { name: "sample task name", completed: false };
+    const task = new TaskObject({ name: "sample task name", completed: false });
     const TaskComponent = mount(<Task task={task} />);
 
     it("should render an li with the task name", () => {
@@ -25,14 +26,22 @@ describe("components", () => {
   });
 
   describe("TaskList", () => {
+    const tasks = {
+      1: new TaskObject({ id: 1, name: "first task" }),
+      2: new TaskObject({ id: 2, name: "second task" })
+    };
+    const List = mount(<TaskList tasks={tasks} />);
     it("should render a Task for each task in props.tasks", () => {
-      const tasks = {
-        1: { id: 1, name: "first task" },
-        2: { id: 2, name: "second task" }
-      };
-
-      const List = mount(<TaskList tasks={tasks} />);
       expect(List.find("Task")).toHaveLength(2);
+    });
+
+    it("should change the task's completed state when checked", () => {
+      const firstKey = Object.keys(List.props().tasks)[0]
+      const firstTask = List.props().tasks[firstKey];
+      const taskComponent = List.find("Task").first()
+      const checkbox = taskComponent.find({ type: "checkbox" });
+      checkbox.simulate("click")
+      expect(firstTask.completed).toEqual(true);
     });
   });
 });

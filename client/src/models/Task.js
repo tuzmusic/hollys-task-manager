@@ -3,7 +3,7 @@ export default class Task {
     this.name = (task && task.name) || "";
     this.description = (task && task.description) || "";
     this.prerequisite_ids = (task && task.prerequisite_ids) || [];
-    this.completed = false;
+    this.completed = (task && (task.completed || false)) || false;
     this.id = task && task.id;
   }
 }
