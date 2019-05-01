@@ -3,8 +3,6 @@ export function addTask(task) {
 }
 
 export function toggleTask(task) {
-  console.log("toggleTask called on", task);
-  
   return {
     type: "EDIT_TASK",
     id: task.id,

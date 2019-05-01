@@ -28,11 +28,11 @@
       "internalConsoleOptions": "openOnSessionStart"
     },
     {
+      "name": "Chrome",
       "type": "chrome",
-      "request": "attach",
-      "name": "Attach to Chrome",
-      "port": 3000,
-      "webRoot": "${workspaceFolder}/index.html"
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceRoot}/src"
     }
   ]
 }
