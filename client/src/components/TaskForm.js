@@ -5,8 +5,7 @@ class TaskForm extends React.Component {
   state = { text: "sample" };
 
   onTextChange(event) {
-    event.persist();
-    this.setState({ text: event.target.text });
+    this.setState({ text: event.target.value }, () => console.log(this.state));
   }
 
   render() {
