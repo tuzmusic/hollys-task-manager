@@ -1,5 +1,4 @@
 import React from "react";
-import "../stylesheets/tasks.css";
 
 const Task = ({task, onChange}) => {
   const changeHandler = onChange

@@ -6,4 +6,11 @@ export default class Task {
     this.completed = (task && (task.completed || false)) || false;
     this.id = task && task.id;
   }
+
+  completable(allTasks) {
+    const prereqs = this.prerequisiteIDs.map(id => {
+      allTasks[id]
+    })
+  }
+  
 }

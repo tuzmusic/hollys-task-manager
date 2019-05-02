@@ -11,8 +11,8 @@ export const initialState = { // using "defaultState" here breaks test. FIXME.
 
 const defaultState = {
   1: new Task({ id: 1, name: "do first" }),
-  2: new Task({ id: 2, name: "do second"}),
-  3: new Task({ id: 3, name: "do last" }),
+  2: new Task({ id: 2, name: "do second", prerequisiteIDs: [2, 1] }),
+  3: new Task({ id: 3, name: "do last", prerequisiteIDs: [2, 1] }),
   4: new Task({ id: 4, name: "another task" })
 };
 
