@@ -13,8 +13,8 @@ describe('models', () => {
       expect(task.completed).toEqual(false)
     });
   
-    it('initializes with an empty prerequisite_ids array', () => {
-      expect(task.prerequisite_ids).toEqual([])
+    it('initializes with an empty prerequisiteIDs array', () => {
+      expect(task.prerequisiteIDs).toEqual([])
     });
 
     it('defaults to a blank name and description', () => {
@@ -24,8 +24,8 @@ describe('models', () => {
     });
 
     it('can be initialized with prerequisites', () => {
-      const newTask = new Task({name:"sample name", prerequisite_ids:[1,2]})
-      expect(newTask.prerequisite_ids).toEqual([1,2]);
+      const newTask = new Task({name:"sample name", prerequisiteIDs:[1,2]})
+      expect(newTask.prerequisiteIDs).toEqual([1,2]);
     });
 
     it('can be initialized with a passed id', () => {
