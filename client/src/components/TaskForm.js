@@ -18,7 +18,6 @@ class TaskForm extends React.Component {
         <button
           type="submit"
           onClick={() => {
-            console.log("from onClick", this.state.text);
             this.props.onSubmit(this.state.text);
           }}
         >
