@@ -3,3 +3,7 @@
   padding-left: 1em;
   list-style-type: none;
 }
+
+.completed {
+  text-decoration-line: line-through
+}
