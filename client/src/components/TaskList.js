@@ -22,11 +22,11 @@ class TaskList extends React.Component {
     return (
       <div className="task-list-container">
         <div className="tasks">
-          {Object.keys(tasks).map(id => {
+          {Object.entries(tasks).map(([id, task]) => {
             return (
               <TaskComponent
                 key={id}
-                task={tasks[id]}
+                task={task}
                 onChange={this.onTaskCheck.bind(this, id)}
               />
             );
