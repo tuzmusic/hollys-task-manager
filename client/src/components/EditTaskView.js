@@ -1,10 +1,10 @@
 import React from "react";
-import TaskComponent from "./TaskComponent";
 import { connect } from "react-redux";
 import { toggleTask, addTask } from "../redux/actions/tasksActions";
-import TaskObject from '../models/Task'
+import TaskObject from "../models/Task";
+import TaskList from "./TaskList";
 
-class TaskList extends React.Component {
+class EditTaskView extends React.Component {
   onTaskCheck(id) {
     const task = this.props.tasks[id];
     this.props.toggleTask(task);
@@ -17,20 +17,16 @@ class TaskList extends React.Component {
   }
 
   render() {
-    const { tasks } = this.props;
+    const { tasks, task } = this.props;
 
     return (
-      <div className="task-list-container">
+      <div className="general-container">
+        <p>
+          <b>Editing: </b>
+          {task.name}
+        </p>
         <div className="tasks">
-          {Object.keys(tasks).map(id => {
-            return (
-              <TaskComponent
-                key={id}
-                task={tasks[id]}
-                onChange={this.onTaskCheck.bind(this, id)}
-              />
-            );
-          })}
+          <TaskList />
         </div>
       </div>
     );
@@ -38,10 +34,10 @@ class TaskList extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { tasks: state.tasks };
+  return { tasks: state.tasks, task: state.tasks[1] };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   { toggleTask, addTask }
-)(TaskList);
+)(EditTaskView);

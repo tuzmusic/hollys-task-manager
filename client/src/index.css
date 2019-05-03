@@ -10,7 +10,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.tasks {
+.task {
+  margin: 0.25em;
+}
+.task-list-container {
   text-align: left;
   padding-left: 1em;
   list-style-type: none;
@@ -18,4 +21,9 @@ code {
 
 .completed {
   text-decoration-line: line-through
+}
+
+.general-container {
+  padding: 1em;
+  text-align: left;
 }
