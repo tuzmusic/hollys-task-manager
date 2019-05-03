@@ -8,9 +8,13 @@ export default class Task {
   }
 
   completable(allTasks) {
-    const prereqs = this.prerequisiteIDs.map(id => {
-      allTasks[id]
-    })
+    const prereqs = this.prerequisiteIDs.map(id => allTasks[id]);
+    let completable = true;
+    prereqs.forEach(task => {
+      if (!task.completed) {
+        completable = false;
+      }
+    });
+    return completable;
   }
-  
 }
