@@ -89,5 +89,10 @@ describe("models", () => {
       task1.addPrerequisites([task2, task3])
       expect(task1.prerequisiteIDs).toEqual([2,3])
     });
+
+    it("can accept a single task", () => {
+      task1.addPrerequisites(task2);
+      expect(task1.prerequisiteIDs).toEqual([2]);
+    });
   });
 });

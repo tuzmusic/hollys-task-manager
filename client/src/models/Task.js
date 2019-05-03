@@ -22,7 +22,8 @@ export default class Task {
     return Task.allExcept({ task: this, allTasks });
   }
 
-  addPrerequisites(tasks) {
+  addPrerequisites(taskOrTasks) {
+    const tasks = taskOrTasks instanceof Task ? [taskOrTasks] : taskOrTasks;
     this.prerequisiteIDs = tasks.map(task => task.id);
   }
 }
