@@ -19,12 +19,16 @@ export default class Task {
   }
 
   allExceptThis(allTasks) {
-    return Task.allExcept({task: this, allTasks})
+    return Task.allExcept({ task: this, allTasks });
+  }
+
+  addPrerequisites(tasks) {
+    this.prerequisiteIDs = tasks.map(task => task.id);
   }
 }
 
-Task.allExcept = ({task, allTasks}) => {
-  let allClone = {...allTasks}
-  delete allClone[task.id]
-  return allClone
-}
+Task.allExcept = ({ task, allTasks }) => {
+  let allClone = { ...allTasks };
+  delete allClone[task.id];
+  return allClone;
+};

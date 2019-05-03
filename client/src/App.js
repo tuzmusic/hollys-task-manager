@@ -15,8 +15,8 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        {/* <TasksIndex/> */}
         <EditTaskView />
+        <TasksIndex/>
       </div>
     </Provider>
   );

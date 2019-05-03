@@ -69,8 +69,8 @@ describe("models", () => {
     const task3 = new Task({ name: "task", id: 3 });
     const allTasks = { 1: task1, 2: task2, 3: task3 };
     it("returns all tasks except the given task", () => {
-      const allExcept = Task.allExcept({task: task1, allTasks }) 
-      expect(allExcept).toEqual({2: task2, 3: task3})
+      const allExcept = Task.allExcept({ task: task1, allTasks });
+      expect(allExcept).toEqual({ 2: task2, 3: task3 });
     });
 
     it('is also an instance method as "allExceptThis(alltasks)', () => {
@@ -78,6 +78,16 @@ describe("models", () => {
         2: task2,
         3: task3
       });
+    });
+  });
+
+  describe("addPrerequsites", () => {
+    const task1 = new Task({ name: "task", id: 1 });
+    const task2 = new Task({ name: "task", id: 2 });
+    const task3 = new Task({ name: "task", id: 3 });
+    it("takes an array of tasks and adds them to the instance's prerequisite tasks", () => {
+      task1.addPrerequisites([task2, task3])
+      expect(task1.prerequisiteIDs).toEqual([2,3])
     });
   });
 });
