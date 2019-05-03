@@ -72,5 +72,12 @@ describe("models", () => {
       const allExcept = Task.allExcept({task: task1, allTasks }) 
       expect(allExcept).toEqual({2: task2, 3: task3})
     });
+
+    it('is also an instance method as "allExceptThis(alltasks)', () => {
+      expect(task1.allExceptThis(allTasks)).toEqual({
+        2: task2,
+        3: task3
+      });
+    });
   });
 });

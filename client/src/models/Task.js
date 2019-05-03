@@ -17,6 +17,10 @@ export default class Task {
     });
     return completable;
   }
+
+  allExceptThis(allTasks) {
+    return Task.allExcept({task: this, allTasks})
+  }
 }
 
 Task.allExcept = ({task, allTasks}) => {
