@@ -3,17 +3,12 @@ import { connect } from "react-redux";
 import { toggleTask, addTask } from "../redux/actions/tasksActions";
 import TaskObject from "../models/Task";
 import TaskList from "./TaskList";
+import Task from "./TaskComponent";
 
 class EditTaskView extends React.Component {
   onTaskCheck(id) {
     const task = this.props.tasks[id];
     this.props.toggleTask(task);
-  }
-
-  onSaveTask(taskName) {
-    const newTask = new TaskObject({ name: taskName });
-    console.log(newTask);
-    this.props.addTask(newTask);
   }
 
   render() {
@@ -26,7 +21,7 @@ class EditTaskView extends React.Component {
           {task.name}
         </p>
         <div className="tasks">
-          <TaskList />
+          <TaskList tasks={Task.allExcept({task: task, allTasks: tasks})} />
         </div>
       </div>
     );

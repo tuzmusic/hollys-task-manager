@@ -18,3 +18,9 @@ export default class Task {
     return completable;
   }
 }
+
+Task.allExcept = ({task, allTasks}) => {
+  let allClone = {...allTasks}
+  delete allClone[task.id]
+  return allClone
+}

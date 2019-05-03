@@ -55,11 +55,22 @@ describe("models", () => {
       name: "sample name",
       prerequisiteIDs: [1, 2]
     });
-    const allTasks = [doFirst, doSecond, doLast]
+    const allTasks = { 1: doFirst, 2: doSecond, 3: doLast };
     it("takes all the tasks to see if the current task is completabe/accessible, visible", () => {
-      expect(doFirst.completable(allTasks)).toBe(true)
-      expect(doSecond.completable(allTasks)).toBe(false)
-      expect(doLast.completable(allTasks)).toBe(false)
+      expect(doFirst.completable(allTasks)).toBe(true);
+      expect(doSecond.completable(allTasks)).toBe(false);
+      expect(doLast.completable(allTasks)).toBe(false);
+    });
+  });
+
+  describe("Task.allExcept", () => {
+    const task1 = new Task({ name: "task", id: 1 });
+    const task2 = new Task({ name: "task", id: 2 });
+    const task3 = new Task({ name: "task", id: 3 });
+    const allTasks = { 1: task1, 2: task2, 3: task3 };
+    it("returns all tasks except the given task", () => {
+      const allExcept = Task.allExcept({task: task1, allTasks }) 
+      expect(allExcept).toEqual({2: task2, 3: task3})
     });
   });
 });
