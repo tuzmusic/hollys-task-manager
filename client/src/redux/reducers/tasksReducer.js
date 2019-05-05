@@ -1,6 +1,7 @@
-import Task from '../../models/Task'
+import Task from "../../models/Task";
 
-export const initialState = { // using "defaultState" here breaks test. FIXME.
+export const initialState = {
+  // using "defaultState" here breaks test. FIXME.
   1: {
     id: 1,
     name: "Sample task",
@@ -11,15 +12,16 @@ export const initialState = { // using "defaultState" here breaks test. FIXME.
 
 const defaultState = {
   1: new Task({ id: 1, name: "do first" }),
-  2: new Task({ id: 2, name: "do second", prerequisiteIDs: [2, 1] }),
+  2: new Task({ id: 2, name: "do second", prerequisiteIDs: [1] }),
   3: new Task({ id: 3, name: "do last", prerequisiteIDs: [2, 1] }),
   4: new Task({ id: 4, name: "another task" })
 };
 
 function createTask(state, taskInfo) {
-  const id = taskInfo.id || 
+  const id =
+    taskInfo.id ||
     Object.keys(state).reduce((maxId, id) => Math.max(id, maxId), -1) + 1;
-  return new Task({ ...taskInfo, id: id});
+  return new Task({ ...taskInfo, id: id });
 }
 
 export default function taskReducer(state = defaultState, action) {
@@ -32,7 +34,10 @@ export default function taskReducer(state = defaultState, action) {
       delete clonedState[action.id];
       return clonedState;
     case "EDIT_TASK":
-      return {...state, [action.id]: {...state[action.id], ...action.changes}}
+      return {
+        ...state,
+        [action.id]: new Task({ ...state[action.id], ...action.changes })
+      };
     default:
       return state;
   }

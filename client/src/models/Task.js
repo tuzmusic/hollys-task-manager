@@ -9,7 +9,7 @@ export default class Task {
 
   completable(allTasks) {
     const prereqs = this.prerequisiteIDs.map(id => allTasks[id]);
-    return prereqs.every(t => t.completed)
+    return prereqs.some(t => !t.completed)
   }
 
   allExceptThis(allTasks) {

@@ -3,7 +3,7 @@ import "./App.css";
 import { combineReducers, createStore } from "redux";
 import { Provider } from "react-redux";
 
-import EditTaskView from "./components/EditTaskView";
+// import EditTaskView from "./components/EditTaskView";
 import TasksIndex from "./components/TasksIndex";
 import taskReducer from "./redux/reducers/tasksReducer";
 
@@ -15,7 +15,7 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <EditTaskView />
+        {/* <EditTaskView /> */}
         <TasksIndex/>
       </div>
     </Provider>

@@ -23,6 +23,10 @@ code {
   text-decoration-line: line-through
 }
 
+.completable {
+  color: grey
+}
+
 .general-container {
   padding: 1em;
   text-align: left;

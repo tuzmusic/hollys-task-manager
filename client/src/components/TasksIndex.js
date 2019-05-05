@@ -9,6 +9,7 @@ class TasksIndex extends React.Component {
   onTaskCheck(id) {
     const task = this.props.tasks[id];
     this.props.toggleTask(task);
+    console.log(task);
   }
 
   onSaveTask(taskName) {
