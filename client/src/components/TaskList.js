@@ -42,7 +42,7 @@ export class TaskList extends React.Component {
 //   return { tasks: state.tasks };
 // };
 
-export default connect(
-  null,
-  { toggleTask, addTask }
-)(TaskList);
+// export default connect(
+//   null,
+//   { toggleTask, addTask }
+// )(TaskList);
