@@ -1,9 +1,8 @@
 import React from "react";
 import TaskList from "./TaskList";
-import { connect } from "react-redux";
 
-export default (TaskListContainer = ({ tasks, onTaskCheck }) => {
-  return <TaskList onTaskCheck={onTaskCheck} tasks={tasks} />;
-});
+const TaskListContainer = (props) => {
+  return <TaskList onTaskCheck={props.onTaskCheck} tasks={props.tasks} />;
+};
 
-connect(mapStateToProps)(TaskListContainer);
+export default TaskListContainer

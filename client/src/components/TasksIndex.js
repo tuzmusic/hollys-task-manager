@@ -1,9 +1,9 @@
 import React from "react";
-import TaskList from "./TaskList";
 import TaskForm from "./TaskForm";
 import { connect } from "react-redux";
 import { toggleTask, addTask } from "../redux/actions/tasksActions";
 import TaskObject from "../models/Task";
+import TaskListContainer from "./TaskListContainer";
 
 class TasksIndex extends React.Component {
   onTaskCheck(id) {
@@ -22,7 +22,7 @@ class TasksIndex extends React.Component {
       <div className="task-list-container">
         <TaskForm onSubmit={this.onSaveTask.bind(this)} />
         <div className="tasks">
-          <TaskList tasks={this.props.tasks} />
+          <TaskListContainer tasks={this.props.tasks} onTaskCheck={this.onTaskCheck.bind(this)}/>
         </div>
       </div>
     );

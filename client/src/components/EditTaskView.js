@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { toggleTask, addTask } from "../redux/actions/tasksActions";
 import Task from "../models/Task";
-import TaskList from "./TaskList";
+import TaskListContainer from "./TaskListContainer";
 
 class EditTaskView extends React.Component {
   onTaskCheck(id) {
@@ -22,7 +22,7 @@ class EditTaskView extends React.Component {
         <div className="tasks">
         Select "doffirsts": <br/>
         <i>(tasks that must be done before this one)</i>
-          <TaskList tasks={Task.allExcept({task, allTasks: tasks})} />
+          <TaskListContainer tasks={Task.allExcept({task, allTasks: tasks})} onTaskCheck={this.onTaskCheck.bind(this)}/>
         </div>
       </div>
     );

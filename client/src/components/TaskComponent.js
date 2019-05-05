@@ -6,7 +6,7 @@ const Task = ({task, ...props}) => {
     <li className={`task ${task.completed && "completed"}`}>
       <input
         type="checkbox"
-        onChange={props.onChange}
+        onChange={props.onChange.bind(null, task.id)}
         checked={task.completed}
       />
       {task.name}
