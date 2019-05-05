@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { toggleTask, addTask } from "../redux/actions/tasksActions";
 import Task from "../models/Task";
 import TaskList from "./TaskList";
-import TaskComponent from "./TaskComponent";
 
 class EditTaskView extends React.Component {
   onTaskCheck(id) {

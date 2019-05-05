@@ -18,8 +18,6 @@ class TasksIndex extends React.Component {
   }
 
   render() {
-    const { tasks } = this.props;
-
     return (
       <div className="task-list-container">
         <TaskForm onSubmit={this.onSaveTask.bind(this)} />

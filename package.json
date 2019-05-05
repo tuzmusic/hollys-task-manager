@@ -1,6 +1,13 @@
 {
   "dependencies": {
-    "thunk": "^0.0.1"
+    "react-scripts": "0.7.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "npm test",
+    "jest": "cd client && npm test -- --watch",
+    "eject": "react-scripts eject"
+  }
 }
