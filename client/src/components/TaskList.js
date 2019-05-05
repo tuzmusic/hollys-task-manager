@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { toggleTask, addTask } from "../redux/actions/tasksActions";
 import TaskObject from '../models/Task'
 
-class TaskList extends React.Component {
+export class TaskList extends React.Component {
   onTaskCheck(id) {
     const task = this.props.tasks[id];
     this.props.toggleTask(task);
@@ -27,6 +27,7 @@ class TaskList extends React.Component {
               <TaskComponent
                 key={id}
                 task={task}
+                // completable={task.completable(tasks)}
                 onChange={this.onTaskCheck.bind(this, id)}
               />
             );
@@ -37,9 +38,9 @@ class TaskList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { tasks: state.tasks };
-};
+// const mapStateToProps = state => {
+//   return { tasks: state.tasks };
+// };
 
 export default connect(
   null,

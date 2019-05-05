@@ -1,11 +1,14 @@
 import React from "react";
 
-const Task = ({task, onChange}) => {
-  const changeHandler = onChange
+const Task = ({task, ...props}) => {
   
   return (
     <li className={`task ${task.completed && "completed"}`}>
-      <input type="checkbox" checked={task.completed} onChange={changeHandler} />
+      <input
+        type="checkbox"
+        onChange={props.onChange}
+        checked={task.completed}
+      />
       {task.name}
     </li>
   );
