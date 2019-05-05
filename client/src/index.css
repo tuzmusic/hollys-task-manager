@@ -24,7 +24,8 @@ code {
 }
 
 .completable {
-  color: grey
+  color: grey;
+  display: none
 }
 
 .general-container {
